@@ -24,21 +24,41 @@ $idsem = $_POST['ssem'];
 
 <body>
 <?php
-$sql = "INSERT INTO justification (date_debut_just, date_fin_just,date_arrive_just, num_ins_etu, id_mod)
-VALUES ('$sdate1', '$sdate2', '$sdate3','$idetu','$idmod')";
+
+
+$sql2 = "SELECT * FROM abscence where num_ins_etu='$idetu';";
+$req2 = mysqli_query($conn, $sql2);
+while($row2 = mysqli_fetch_assoc($req2)) {
+$nabs = $row2['num_abs'];
+$dabs = $row2['date_abs'];
+$Date2 = date('Y-m-d', strtotime($dabs . " + 2 day"));
+ 
+if(strtotime($dabs )<=strtotime($Date2) ) {
+  $Date3 = date('Y-m-d', strtotime($sdate1));
+  $Date4 = date('Y-m-d', strtotime($sdate2));
+  if(strtotime($dabs )<=strtotime($Date4)  && strtotime($dabs )>=strtotime($Date3) ) {
+  $sql = "INSERT INTO justification (date_debut_just, date_fin_just, date_arrive_just, num_abs, num_ins_etu)
+  VALUES ('$sdate1', '$sdate2', '$sdate3', '$nabs','$idetu')";
        
     if (mysqli_query($conn, $sql)) {
        
       } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
       }
+    }
+}
+
+}
+
+
+
 
 ?>
 <form action="abs.php" method="post">
-<input type="text" name="sdate1"    >
-<input type="text" name="sdate2"   >
-<input type="text" name="sdate3"    >
-<button type="submit" >Valider la mise justification</button>
+<input type="hidden" name="smod"   value=<?php echo $idmod; ?> >
+<input type="hidden" name="sspec"   value=<?php echo $idspec; ?>>
+<input type="hidden" name="ssem"    value=<?php echo $idsem; ?>>
+<button type="submit" >Valider la justification</button>
 
 </form>
 </body>

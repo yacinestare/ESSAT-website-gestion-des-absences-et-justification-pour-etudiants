@@ -68,16 +68,16 @@ else if(!isset($_POST['ssem']) )
        }
        ?> </h1>
     
-      <table>
+      <table border = '2px';>
        <tr id="id_table">
-         <th>num_ins_etu</th>
-         <th>nom_etu</th>
-         <th>prenom-etu</th>
-         <th>date_naiss_etu</th>
-         <th>nombre absence</th>
-         <th>nombre absence justifie </th>
-         <th>mettre_abs</th>
-         <th>justifier</th>
+         <th width="150px" height="150px" bgcolor="blue">num_ins_etu</th>
+         <th width="150px" height="150px" bgcolor="blue">nom_etu</th>
+         <th width="150px" height="150px" bgcolor="blue">prenom-etu</th>
+         <th width="150px" height="150px" bgcolor="blue">date_naiss_etu</th>
+         <th width="150px" height="150px" bgcolor="blue">nombre absence</th>
+         <th width="150px" height="150px" bgcolor="blue">nombre absence justifie </th>
+         <th width="150px" height="150px" bgcolor="red">mettre_abs</th>
+         <th width="150px" height="150px" bgcolor="green">justifier</th>
          </tr>
      
         <?php 
@@ -116,7 +116,7 @@ else if(!isset($_POST['ssem']) )
                       
                 
                 <td><a  href="mabs.php?id=<?=$row['num_ins_etu']?>&nommod=<?=$nommod?>&idmod=<?=$smod?>&spec=<?=$sspec?>&sem=<?=$ssem?>"> mettre absent </a> </td>
-                <td><a  href="justification.php?id=<?=$row['num_ins_etu']?>"> justifier </a> </td>
+                <td><a  href="justification.php?id=<?=$row['num_ins_etu']?>&nommod=<?=$nommod?>&idmod=<?=$smod?>&spec=<?=$sspec?>&sem=<?=$ssem?>"> justifier </a> </td>
              </tr>
              <?php 
 }

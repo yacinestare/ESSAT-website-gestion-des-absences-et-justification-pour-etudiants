@@ -42,20 +42,21 @@ $idsem =$_GET['sem'];
 
 <?php
 $currentDate = date('Y-m-d'); ?>
-<label for="sdate4">veuillez confirmer la date:</label>
 
+<label for="sdate10">veuillez confirmer la date de debut:</label>
 <input type="date" id="sdate1" name="sdate1"
        value=<?php echo $currentDate; ?>
      >
-       >
+<label for="sdate20">veuillez confirmer la date de fin:</label>
 <input type="date" id="sdate2" name="sdate2"
        value=<?php echo $currentDate; ?>
      >
-       >
+
+<label for="sdate30">veuillez confirmer la date arrivee:</label>
 <input type="date" id="sdate3" name="sdate3"
        value=<?php echo $currentDate; ?>
      >
-       >
+       
 
 
    
@@ -78,13 +79,15 @@ $currentDate = date('Y-m-d'); ?>
 
 
 
-      <table>
+      <table border = '2px';>
        <tr id="id_table">
-         <th>date debut de justification</th>
-         <th>date de fin </th>
-         <th>date  arriver</th>
-         <th>justifie </th>
-         <th>date de justification </th>
+       <th width="150px" height="150px" bgcolor="green">num justification </th>
+       <th width="150px" height="150px" bgcolor="green">num absence </th>
+       <th width="150px" height="150px" bgcolor="blue">date  absence</th>
+         <th width="150px" height="150px" bgcolor="blue">date debut de justification</th>
+         <th width="150px" height="150px" bgcolor="blue">date de fin </th>
+         <th width="150px" height="150px" bgcolor="blue">date  arriver</th>
+        
          </tr>
      
         <?php 
@@ -92,21 +95,22 @@ $currentDate = date('Y-m-d'); ?>
        
         $req = mysqli_query($conn, $sql);
          while($row = mysqli_fetch_assoc($req)) {
-            $nabs=$row['num_abs']; $dabs =$row['date_abs']; $nabas=$row['nature_abs'];
-            $sql2 = "SELECT * FROM justification  WHERE num_abs='$nabs'";  
+            $nabs=$row['num_abs']; $ddeb =$row['date_debut_just']; $dfin =$row['date_fin_just']; $darv =$row['date_arrive_just'];
+            $njust=$row['num_just'];
+            
+            $sql2 = "SELECT * FROM abscence  WHERE num_abs='$nabs'";
             $req2 = mysqli_query($conn, $sql2);
-            $i=0; $djus="";
             while($row2 = mysqli_fetch_assoc($req2)) {
-               $djus=$row2['date_arrive_just'];
-               $i++; 
+            $dabs = $row2['date_abs'];
             }
              ?>
              <tr  id="id_table">
+                <td><?=$njust?></td>
                 <td><?=$nabs?></td>
                 <td><?=$dabs?></td>
-                <td><?=$nabas?></td>
-                <td><?=$i?></td>
-                <td><?=$djus?></td>
+                <td><?=$ddeb?></td>
+                <td><?=$dfin?></td>
+                <td><?=$darv?></td>
              </tr>
              <?php 
 }
